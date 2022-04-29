@@ -13,5 +13,10 @@ export default defineNuxtConfig({
     yup: "yup/lib/index.js",
   },
 
+  // See: https://github.com/tailwindlabs/heroicons/issues/564
+  build: {
+    transpile: ["@heroicons/vue"],
+  },
+
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
 });

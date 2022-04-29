@@ -10,3 +10,30 @@
     </Card>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useGlobalStore } from "~~/store/global";
+import { usePokemonStore } from "~~/store/pokemon";
+import { AllPokemonsPayload } from "~~/types/pokemon";
+
+const pokemonStore = usePokemonStore();
+const globalStore = useGlobalStore();
+
+const limit = ref(9);
+const offset = ref(0);
+const pokemons = computed(() => {
+  return pokemonStore.AllPokemons;
+});
+
+async function loadPokemon(payload: AllPokemonsPayload) {
+  try {
+    await pokemonStore.getAllPokemons(payload);
+  } catch (e) {
+    globalStore.setError(e);
+  }
+}
+
+onMounted(() => {
+  loadPokemon({ limit: limit.value, offset: offset.value });
+});
+</script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen min-w-full flex-col">
+  <div class="relative flex min-h-screen min-w-full flex-col">
     <header class="sticky mx-auto w-full bg-white shadow">
       <nav class="relative flex justify-center p-5">
         <h1 class="text-3xl font-bold text-primary">Pokedex</h1>
@@ -11,7 +11,41 @@
         <slot />
       </div>
     </main>
+
+    <div v-if="toast" class="absolute inset-x-0 bottom-0 pb-4">
+      <div class="flex items-center justify-center">
+        <Toast :message="error" @close="closeToast" />
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { storeToRefs } from "pinia";
+import { useGlobalStore } from "~~/store/global";
+
+const globalStore = useGlobalStore();
+const { error } = storeToRefs(globalStore);
+
+const toast = ref(false);
+const toastTimeout = ref(3000);
+
+watch(error, (val, oldVal) => {
+  if (val !== oldVal && val) toast.value = true;
+});
+
+let timeout = null;
+
+watch(toast, (val, oldVal) => {
+  if (val !== oldVal)
+    timeout = setTimeout(() => {
+      closeToast();
+    }, toastTimeout.value);
+});
+
+function closeToast() {
+  clearTimeout(timeout);
+  toast.value = false;
+  globalStore.clearError();
+}
+</script>

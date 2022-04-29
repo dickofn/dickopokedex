@@ -1,11 +1,19 @@
 import { defineStore } from "pinia";
 
-export const useUserStore = defineStore("globalStore", {
+export const useGlobalStore = defineStore("globalStore", {
   state: () => {
     return {
       backUrl: "",
+      error: "",
     };
   },
-  getters: {},
-  actions: {},
+
+  actions: {
+    setError(error) {
+      this.error = `Error (${error.response?.status})`;
+    },
+    clearError() {
+      this.error = "";
+    },
+  },
 });
