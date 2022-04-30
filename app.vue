@@ -24,7 +24,7 @@ useHead({
   ],
 });
 
-useFetch("/api/pokemon");
+useFetch("/api/pokemon/preload");
 </script>
 
 <style>

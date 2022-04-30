@@ -3,6 +3,10 @@ import { defineNuxtConfig } from "nuxt";
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   runtimeConfig: {
+    mongoUrl: process.env.MONGO_URL,
+    mongoDb: process.env.MONGO_DB,
+    mongoUser: process.env.MONGO_USER,
+    mongoPassword: process.env.MONGO_PASSWORD,
     public: {
       pokeApiUrl: process.env.POKEAPI_API_URL,
     },
