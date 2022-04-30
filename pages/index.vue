@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-full min-w-full py-10 px-5">
+  <div class="relative min-h-full min-w-full px-5 pt-10 pb-16">
     <Grid>
       <PokemonCard
         v-for="pokemon in data"
@@ -7,6 +7,10 @@
         :pokemon="pokemon"
       />
     </Grid>
+
+    <div class="absolute inset-x-0 bottom-0 flex justify-center p-4">
+      <Spinner v-if="pending" />
+    </div>
   </div>
 </template>
 
@@ -18,11 +22,11 @@ import { usePokemonStore } from "~~/store/pokemon";
 const pokemonStore = usePokemonStore();
 const globalStore = useGlobalStore();
 
-const limit = ref(4);
+const limit = ref(24);
 const offset = ref(0);
 const { pokemons } = storeToRefs(pokemonStore);
 
-const { data, error, refresh } = useAsyncData(
+const { data, error, refresh, pending } = useAsyncData(
   "pokemons",
   () =>
     $fetch("/api/pokemon/getAll", {
@@ -51,4 +55,17 @@ if (error) {
 watch([offset, limit], () => {
   refresh();
 });
+
+// Infinite scroll watcher
+if (process.client) {
+  window.onscroll = () => {
+    const bottomOfWindow =
+      document.documentElement.scrollTop + window.innerHeight ===
+      document.documentElement.scrollHeight;
+
+    if (bottomOfWindow) {
+      offset.value++;
+    }
+  };
+}
 </script>
