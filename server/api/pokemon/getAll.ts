@@ -22,7 +22,7 @@ export default async (req) => {
   try {
     pokemons = (await db
       .collection("pokemons")
-      .find({})
+      .find({}, { projection: { _id: 0, name: 1, types: 1, sprites: 1 } })
       .skip(+offset)
       .limit(+limit)
       .toArray()) as unknown as PokemonResponse[];
