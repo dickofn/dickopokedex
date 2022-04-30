@@ -19,19 +19,23 @@ export default async (req) => {
   const db = client.db();
 
   try {
-    const preloadPokemons = await db.collection("pokemons").find({}).toArray();
+    const preloadPokemonsCount = await db
+      .collection("pokemons")
+      .countDocuments();
 
     const resAllPokemons = await axios(`${pokeApiUrl}/pokemon`, {
       params: { limit: 100000, offset: 0 },
     });
     const dataAllPokemons: AllPokemonsResponse = resAllPokemons.data;
 
-    const needUpdate =
-      dataAllPokemons.results.length !== preloadPokemons.length;
+    const needUpdate = dataAllPokemons.results.length !== preloadPokemonsCount;
 
     if (needUpdate) {
       async function loadAllPokemons() {
-        const arr = preloadPokemons;
+        const preloadPokemons = await db
+          .collection("pokemons")
+          .find({}, { projection: { _id: 0, name: 1 } })
+          .toArray();
         try {
           await Promise.all(
             dataAllPokemons.results.map(async ({ name }) => {

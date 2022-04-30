@@ -5,6 +5,8 @@
 </template>
 
 <script setup lang="ts">
+import { useGlobalStore } from "./store/global";
+
 useHead({
   title: "Welcome",
   titleTemplate: "%s | Dicko Pokedex",
@@ -24,7 +26,13 @@ useHead({
   ],
 });
 
-useFetch("/api/pokemon/preload");
+const globalStore = useGlobalStore();
+
+try {
+  await useFetch("/api/pokemon/preload");
+} catch (err) {
+  globalStore.setError(err);
+}
 </script>
 
 <style>
