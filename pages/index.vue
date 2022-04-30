@@ -58,14 +58,24 @@ watch([offset, limit], () => {
 
 // Infinite scroll watcher
 if (process.client) {
+  // Desktop watcher
   window.onscroll = () => {
+    onBottomScroll();
+  };
+
+  // Mobile watcher
+  window.ontouchmove = () => {
+    onBottomScroll();
+  };
+
+  function onBottomScroll() {
     const bottomOfWindow =
-      document.documentElement.scrollTop + window.innerHeight ===
+      Math.ceil(document.documentElement.scrollTop) + window.innerHeight ===
       document.documentElement.scrollHeight;
 
     if (bottomOfWindow) {
       offset.value++;
     }
-  };
+  }
 }
 </script>
