@@ -7,7 +7,7 @@
       <img :src="defaultPic" :alt="pokemon.name" />
     </div>
     <div class="ml-6">
-      <h3 class="mb-1 text-2xl font-bold capitalize leading-5">
+      <h3 class="mb-1 text-lg font-bold capitalize leading-5">
         {{ pokemon.name }}
       </h3>
       <div class="mt-4 flex flex-wrap space-x-1">
