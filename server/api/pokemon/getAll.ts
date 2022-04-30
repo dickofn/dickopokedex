@@ -23,8 +23,9 @@ export default async (req) => {
     pokemons = (await db
       .collection("pokemons")
       .find({}, { projection: { _id: 0, name: 1, types: 1, sprites: 1 } })
-      .skip(+offset)
+      .skip(+offset * +limit)
       .limit(+limit)
+      .sort({ id: 1 })
       .toArray()) as unknown as PokemonResponse[];
   } catch (err) {
     throw err;

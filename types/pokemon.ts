@@ -8,21 +8,21 @@ export interface PokemonPayload {
 }
 
 export interface PokemonResponse {
-  abilities: object[];
-  base_experience: number;
-  forms: object[];
-  game_indices: object[];
-  height: number;
-  held_items: object[];
-  id: number;
-  is_default: boolean;
-  location_area_encounters: string;
-  moves: object[];
+  abilities?: object[];
+  base_experience?: number;
+  forms?: object[];
+  game_indices?: object[];
+  height?: number;
+  held_items?: object[];
+  id?: number;
+  is_default?: boolean;
+  location_area_encounters?: string;
+  moves?: object[];
   name: string;
-  order: number;
-  past_types: any[];
-  species: { name: string; url: string };
-  sprites: {
+  order?: number;
+  past_types?: any[];
+  species?: { name: string; url: string };
+  sprites?: {
     back_default?: string;
     back_female?: string;
     back_shiny?: string;
@@ -34,7 +34,7 @@ export interface PokemonResponse {
     other: object;
     versions: object;
   };
-  stats: object[];
-  types: object[];
-  weight: number;
+  stats?: object[];
+  types?: object[];
+  weight?: number;
 }
