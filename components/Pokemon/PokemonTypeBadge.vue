@@ -1,42 +1,22 @@
 <template>
-  <div
-    class="flex items-center rounded border border-primary p-4 shadow-lg"
+  <span
+    class="mr-2 rounded border border-primary px-2.5 py-0.5 text-xs font-semibold shadow-lg"
     :class="classEachType"
   >
-    <div class="w-26 rounded border border-primary bg-primary shadow-xl">
-      <img :src="defaultPic" :alt="pokemon.name" />
-    </div>
-    <div class="ml-6">
-      <h3 class="mb-1 text-2xl font-bold capitalize leading-5">
-        {{ pokemon.name }}
-      </h3>
-      <div class="mt-4 flex flex-wrap space-x-1">
-        <PokemonTypeBadge
-          v-for="pokemonType in props.pokemon.types"
-          :key="pokemonType.type.name"
-          :type="pokemonType.type.name"
-        />
-      </div>
-    </div>
-  </div>
+    {{ props.type }}
+  </span>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const props = defineProps({
-  pokemon: {
-    type: Object,
+  type: {
+    type: String,
     required: true,
   },
 });
 
-const defaultPic = computed(() => {
-  return (
-    props.pokemon.sprites.front_default || props.pokemon.sprites.front_female
-  );
-});
-
 const classEachType = computed(() => {
-  const type = props.pokemon.types[0].type.name;
+  const type = props.type;
   if (type === "normal") {
     return "bg-pokemon-normal";
   } else if (type === "fire") {
