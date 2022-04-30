@@ -3,16 +3,6 @@ export interface AllPokemonsPayload {
   offset: number;
 }
 
-export interface AllPokemonsResponse {
-  count: number;
-  next?: string;
-  previous?: string;
-  results: {
-    name: string;
-    url: string;
-  }[];
-}
-
 export interface PokemonPayload {
   name: string;
 }

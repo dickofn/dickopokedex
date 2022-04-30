@@ -6,6 +6,10 @@
         consequuntur perferendis tenetur, culpa quaerat id, ipsum ducimus
         facilis amet dolore laudantium distinctio autem necessitatibus ex
         consectetur, optio animi voluptatum explicabo.
+
+        <div v-if="isLoading" class="text-4xl">LOADING BRO!</div>
+
+        {{ pokemons }}
       </div>
     </Card>
   </div>
@@ -18,6 +22,7 @@ import { AllPokemonsPayload } from "~~/types/pokemon";
 
 const pokemonStore = usePokemonStore();
 const globalStore = useGlobalStore();
+const isLoading = ref(false);
 
 const limit = ref(9);
 const offset = ref(0);
@@ -25,15 +30,18 @@ const pokemons = computed(() => {
   return pokemonStore.AllPokemons;
 });
 
-async function loadPokemon(payload: AllPokemonsPayload) {
+async function loadAllPokemons(payload: AllPokemonsPayload) {
+  isLoading.value = true;
   try {
     await pokemonStore.getAllPokemons(payload);
   } catch (e) {
     globalStore.setError(e);
+  } finally {
+    isLoading.value = false;
   }
 }
 
 onMounted(() => {
-  loadPokemon({ limit: limit.value, offset: offset.value });
+  loadAllPokemons({ limit: limit.value, offset: offset.value });
 });
 </script>
