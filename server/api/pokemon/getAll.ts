@@ -25,7 +25,13 @@ export default async (req) => {
     pokemons = (await db
       .collection("pokemons")
       .find(
-        { name: new RegExp(".*" + filter + ".*") },
+        {
+          // Search either pokemon have that wildcard-ed name or tag
+          $or: [
+            { name: new RegExp(".*" + filter + ".*") },
+            { types: { $elemMatch: { "type.name": filter } } },
+          ],
+        },
         { projection: { _id: 0, name: 1, types: 1, sprites: 1 } }
       )
       .skip(+offset * +limit)
