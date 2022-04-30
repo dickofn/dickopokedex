@@ -74,7 +74,8 @@ if (process.client) {
       document.documentElement.scrollHeight;
 
     if (bottomOfWindow) {
-      offset.value++;
+      console.log("[LOG] | onBottomScroll | pending", pending.value);
+      if (!pending.value) offset.value++;
     }
   }
 }
