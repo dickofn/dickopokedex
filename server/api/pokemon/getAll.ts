@@ -20,6 +20,7 @@ export default async (req) => {
 
   let pokemons: PokemonResponse[];
   try {
+    // See: https://developerslogblog.wordpress.com/2019/11/27/mongodb-sort-how-to-fix-maximum-ram-exceeded-error/
     db.collection("pokemons").createIndex({ id: 1 });
     pokemons = (await db
       .collection("pokemons")
