@@ -20,6 +20,7 @@ export default async (req) => {
 
   let pokemons: PokemonResponse[];
   try {
+    db.collection("pokemons").createIndex({ id: 1 });
     pokemons = (await db
       .collection("pokemons")
       .find({}, { projection: { _id: 0, name: 1, types: 1, sprites: 1 } })
