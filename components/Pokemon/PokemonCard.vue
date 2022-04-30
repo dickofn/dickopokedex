@@ -29,12 +29,14 @@ const props = defineProps({
   },
 });
 
+// Incase front_default is null
 const defaultPic = computed(() => {
   return (
     props.pokemon.sprites.front_default || props.pokemon.sprites.front_female
   );
 });
 
+// Custom color class for pokemon by type
 const classEachType = computed(() => {
   const type = props.pokemon.types[0].type.name;
   if (type === "normal") {

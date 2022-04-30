@@ -28,6 +28,7 @@ useHead({
 
 const globalStore = useGlobalStore();
 
+// On application init, do server function to preload all pokemon data to MongoDB
 try {
   await useFetch("/api/pokemon/preload");
 } catch (err) {

@@ -30,6 +30,8 @@ const { data, error, refresh } = useAsyncData(
     }),
   {
     transform: (data) => {
+      // First hydration is happen on the server, normal reactive didn't support SSR
+      // so using pinia to hydrate first data, and combine it again after that
       const temp = [...pokemons.value];
       temp.push(...data);
       pokemonStore.setPokemons(temp);
@@ -45,6 +47,7 @@ if (error) {
   globalStore.setError(error);
 }
 
+// Set watch observer to update pokemonStore when limit or offset change
 watch([offset, limit], () => {
   refresh();
 });

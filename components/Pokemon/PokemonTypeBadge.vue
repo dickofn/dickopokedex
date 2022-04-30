@@ -15,6 +15,7 @@ const props = defineProps({
   },
 });
 
+// Custom color class for pokemon by type
 const classEachType = computed(() => {
   const type = props.type;
   if (type === "normal") {
