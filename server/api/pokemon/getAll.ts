@@ -26,6 +26,7 @@ export default async (req) => {
       .skip(+offset * +limit)
       .limit(+limit)
       .sort({ id: 1 })
+      .allowDiskUse()
       .toArray()) as unknown as PokemonResponse[];
   } catch (err) {
     throw err;
@@ -33,5 +34,5 @@ export default async (req) => {
 
   client.close();
 
-  return { pokemons };
+  return pokemons;
 };
