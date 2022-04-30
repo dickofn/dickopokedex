@@ -3,10 +3,10 @@
     class="flex items-center rounded border border-primary p-4 shadow-lg"
     :class="classEachType"
   >
-    <div class="w-26 rounded border border-primary bg-primary shadow-xl">
+    <div class="h-24 w-24 rounded border border-primary bg-white p-1 shadow-xl">
       <img :src="defaultPic" :alt="pokemon.name" />
     </div>
-    <div class="ml-6">
+    <div class="ml-6 flex-1">
       <h3 class="mb-1 text-lg font-bold capitalize leading-5">
         {{ pokemon.name }}
       </h3>
@@ -15,6 +15,7 @@
           v-for="pokemonType in props.pokemon.types"
           :key="pokemonType.type.name"
           :type="pokemonType.type.name"
+          class="mt-1"
         />
       </div>
     </div>
