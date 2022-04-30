@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import { PokemonResponse } from "~~/types/pokemon";
 
 export default async (req) => {
-  const { limit, offset } = useQuery(req);
+  const { limit, offset, filter } = useQuery(req);
 
   const config = useRuntimeConfig();
   const { mongoUrl, mongoDb, mongoUser, mongoPassword } = config;
@@ -24,7 +24,10 @@ export default async (req) => {
     db.collection("pokemons").createIndex({ id: 1 });
     pokemons = (await db
       .collection("pokemons")
-      .find({}, { projection: { _id: 0, name: 1, types: 1, sprites: 1 } })
+      .find(
+        { name: new RegExp(".*" + filter + ".*") },
+        { projection: { _id: 0, name: 1, types: 1, sprites: 1 } }
+      )
       .skip(+offset * +limit)
       .limit(+limit)
       .sort({ id: 1 })
