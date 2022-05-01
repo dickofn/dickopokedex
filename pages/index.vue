@@ -36,7 +36,7 @@
     </div>
 
     <div
-      v-if="!pending && data.length <= 0"
+      v-if="!pending && data && data.length <= 0"
       class="py-4 text-center text-primary"
     >
       No results found
@@ -58,13 +58,16 @@ const filter = ref("");
 const { pokemons, filter: storedFilter, favorites } = storeToRefs(pokemonStore);
 
 function search(searchInput: string) {
+  if (searchInput === storedFilter.value) return;
+  data.value = null;
   limit.value = 24;
   offset.value = 0;
-  data.value = null;
   filter.value = searchInput;
 
   // After search go back to top
   if (process.client) document.documentElement.scrollTop = 0;
+
+  refresh();
 }
 
 function toggleFavorite(pokemonName: string) {
@@ -112,7 +115,7 @@ if (error) {
   globalStore.setError(error);
 }
 
-watch([offset, limit, filter], () => {
+watch([offset, limit], () => {
   refresh();
 });
 
