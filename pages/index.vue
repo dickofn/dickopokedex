@@ -10,7 +10,6 @@
       <NuxtLink
         to="/favorites"
         class="btn flex w-auto cursor-pointer items-center rounded-b-none border-b-0 border-primary py-4 shadow-none sm:rounded-b sm:border-b sm:shadow-xl"
-        @click="favoritesOnly = !favoritesOnly"
       >
         Favorites
       </NuxtLink>
@@ -56,7 +55,6 @@ const globalStore = useGlobalStore();
 const limit = ref(24);
 const offset = ref(0);
 const filter = ref("");
-const favoritesOnly = ref(false);
 const { pokemons, filter: storedFilter, favorites } = storeToRefs(pokemonStore);
 
 function search(searchInput: string) {
