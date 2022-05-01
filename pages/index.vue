@@ -8,6 +8,7 @@
         @submit="search"
       />
       <NuxtLink
+        to="/favorites"
         class="btn flex w-auto cursor-pointer items-center rounded-b-none border-b-0 border-primary py-4 shadow-none sm:rounded-b sm:border-b sm:shadow-xl"
         @click="favoritesOnly = !favoritesOnly"
       >
@@ -25,8 +26,21 @@
       />
     </Grid>
 
-    <div class="absolute inset-x-0 bottom-0 flex justify-center p-4">
+    <div
+      class="absolute flex justify-center p-4"
+      :class="[
+        { 'inset-x-0 bottom-0': data },
+        { 'inset-0 items-center': !data },
+      ]"
+    >
       <Spinner v-if="pending" />
+    </div>
+
+    <div
+      v-if="!pending && data.length <= 0"
+      class="py-4 text-center text-primary"
+    >
+      No results found
     </div>
   </div>
 </template>
