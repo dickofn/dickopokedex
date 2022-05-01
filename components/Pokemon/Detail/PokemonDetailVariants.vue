@@ -17,19 +17,19 @@
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.front_shiny"
-        title="Default Shiny"
+        title="Default shiny"
         :img="props.sprites.front_shiny"
       />
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.front_female"
-        title="Female"
+        title="female"
         :img="props.sprites.front_female"
       />
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.front_shiny_female"
-        title="Female Shiny"
+        title="female shiny"
         :img="props.sprites.front_shiny_female"
       />
 
@@ -41,31 +41,31 @@
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.other.home.front_shiny"
-        title="Home Shiny"
+        title="Home shiny"
         :img="props.sprites.other.home.front_shiny"
       />
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.other.home.front_female"
-        title="Home Female"
+        title="Home female"
         :img="props.sprites.other.home.front_female"
       />
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.other.home.front_shiny_female"
-        title="Home Female Shiny"
+        title="Home female shiny"
         :img="props.sprites.other.home.front_shiny_female"
       />
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.other.dream_world.front_default"
-        title="Dream World"
+        title="Dream world"
         :img="props.sprites.other.dream_world.front_default"
       />
 
       <PokemonDetailVariantsItem
         v-if="props.sprites.other.dream_world.front_female"
-        title="Dream World Female"
+        title="Dream world female"
         :img="props.sprites.other.dream_world.front_female"
       />
     </div>

@@ -1,6 +1,7 @@
 <template>
   <div class="relative min-h-full min-w-full">
     <NuxtLink
+      v-if="!pending"
       to="/"
       class="link absolute -top-[54px] left-0 z-10 flex items-center"
     >
@@ -23,13 +24,13 @@
       />
     </div>
 
-    <!-- <div class="mt-10">
+    <div class="mt-10">
       <PokemonDetailStats
         v-if="data"
         :stats="data.stats"
         :class-each-type="classEachType"
       />
-    </div> -->
+    </div>
 
     <div class="absolute inset-0 -z-10 flex items-center justify-center p-4">
       <Spinner v-if="pending" />
