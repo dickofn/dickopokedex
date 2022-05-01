@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import PokemonDetailStatsItem from "./PokemonDetailStatsItem.vue";
 const props = defineProps({
   stats: {
     type: Array,
