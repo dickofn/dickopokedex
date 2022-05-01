@@ -32,7 +32,6 @@
 </template>
 
 <script setup lang="ts">
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import { storeToRefs } from "pinia";
 import { useGlobalStore } from "~~/store/global";
 import { usePokemonStore } from "~~/store/pokemon";
