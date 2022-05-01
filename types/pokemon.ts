@@ -1,3 +1,5 @@
+import { number } from "yup";
+
 export interface AllPokemonsPayload {
   limit?: number;
   offset?: number;
@@ -36,6 +38,13 @@ export interface PokemonResponse {
     versions: object;
   };
   stats?: object[];
-  types?: object[];
+  types?: PokemonType[];
   weight?: number;
+}
+
+export interface PokemonType {
+  slot?: number;
+  type?: {
+    name: string;
+  };
 }
