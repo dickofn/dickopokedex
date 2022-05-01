@@ -40,7 +40,7 @@ try {
 // Because favorite is stored in client, check if it's client process already
 if (process.client) {
   pokemonStore.clientUpdateFavorites(
-    JSON.parse(localStorage.getItem("favorites"))
+    JSON.parse(localStorage.getItem("favorites")) || []
   );
 }
 </script>
