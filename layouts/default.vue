@@ -3,7 +3,9 @@
     <!-- Header -->
     <header class="sticky mx-auto w-full bg-white shadow">
       <nav class="relative flex justify-center p-5">
-        <h1 class="text-3xl font-bold text-primary">Pokedex</h1>
+        <NuxtLink to="/">
+          <h1 class="text-3xl font-bold text-primary">Pokedex</h1>
+        </NuxtLink>
       </nav>
     </header>
 

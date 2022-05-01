@@ -5,6 +5,7 @@ export const usePokemonStore = defineStore("pokemonStore", {
   state: () => {
     return {
       pokemons: [] as PokemonResponse[],
+      favoritePokemons: [] as PokemonResponse[],
       offset: 0,
       limit: 24,
       filter: "",
@@ -19,6 +20,9 @@ export const usePokemonStore = defineStore("pokemonStore", {
     },
     setPokemons(pokemons: PokemonResponse[]) {
       this.pokemons = pokemons;
+    },
+    setFavoritePokemons(pokemons: PokemonResponse[]) {
+      this.favoritePokemons = pokemons;
     },
     addFavorites(pokemonName: string) {
       this.favorites.push(pokemonName);
