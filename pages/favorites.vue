@@ -8,10 +8,10 @@
         @submit="search"
       />
       <NuxtLink
-        to="/favorites"
+        to="/"
         class="btn flex w-auto cursor-pointer items-center rounded-b-none border-b-0 border-primary py-4 shadow-none sm:rounded-b sm:border-b sm:shadow-xl"
       >
-        Favorites
+        Home
       </NuxtLink>
     </div>
 
