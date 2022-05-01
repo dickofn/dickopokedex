@@ -1,6 +1,7 @@
 # Introduction
 
-This app is created with Nuxt 3, when this project started Nuxt 3 is just released its RC1 version.
+This project is created with Nuxt 3, when this project started Nuxt 3 is just released its RC1 version.
+
 This project is created using Nuxt 3 capabilities and mixed with Pinia
 
 ## Demo: [Take me there](http://dickopokedex.vercel.app "Let's Go")
