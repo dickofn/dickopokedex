@@ -98,8 +98,6 @@ const { data, error, refresh, pending } = useAsyncData(
       // New filter prevent scroll load stacking and reset from top
       if (filter.value !== storedFilter.value) {
         pokemonStore.setParams({
-          limit: limit.value,
-          offset: offset.value,
           filter: filter.value,
         });
         pokemonStore.setPokemons(data);
@@ -111,12 +109,6 @@ const { data, error, refresh, pending } = useAsyncData(
     },
   }
 );
-
-pokemonStore.setParams({
-  limit: limit.value,
-  offset: offset.value,
-  filter: filter.value,
-});
 
 if (error) {
   globalStore.setError(error);

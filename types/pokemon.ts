@@ -1,7 +1,7 @@
 export interface AllPokemonsPayload {
-  limit: number;
-  offset: number;
-  filter: string;
+  limit?: number;
+  offset?: number;
+  filter?: string;
 }
 
 export interface PokemonPayload {
