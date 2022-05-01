@@ -32,6 +32,26 @@
       />
     </div>
 
+    <div class="mt-10">
+      <PokemonDetailAbilities
+        v-if="data"
+        :abilities="data.abilities"
+        :class-each-type="classEachType"
+      />
+    </div>
+
+    <div class="mt-10">
+      <PokemonDetailMoves
+        v-if="data"
+        :moves="data.moves"
+        :class-each-type="classEachType"
+      />
+    </div>
+
+    <button class="btn fixed bottom-2 right-2" @click="backToTop">
+      Back to top
+    </button>
+
     <div class="absolute inset-0 -z-10 flex items-center justify-center p-4">
       <Spinner v-if="pending" />
     </div>
@@ -62,8 +82,12 @@ if (error) {
   if (error.value) router.push("/");
 }
 
+function backToTop() {
+  if (process.client) window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 onMounted(() => {
-  if (process.client) document.documentElement.scrollTop = 0;
+  backToTop();
 });
 
 // Custom color class for pokemon by type
