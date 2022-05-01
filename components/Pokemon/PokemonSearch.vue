@@ -18,6 +18,7 @@
 
       <button
         v-if="!filter"
+        type="button"
         class="link absolute inset-y-0 right-0 z-20 cursor-pointer pr-4 pl-2 text-xs font-medium leading-3 underline"
         @click="submit"
       >
@@ -25,6 +26,7 @@
       </button>
       <button
         v-else
+        type="button"
         class="link absolute inset-y-0 right-0 z-20 cursor-pointer pr-4 pl-2 text-xs font-medium leading-3 underline"
         @click="clear"
       >
@@ -54,4 +56,8 @@ function clear() {
   search.value = "";
   emit("submit", search.value.toLowerCase());
 }
+
+onMounted(() => {
+  search.value = filter.value;
+});
 </script>

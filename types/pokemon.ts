@@ -1,5 +1,3 @@
-import { number } from "yup";
-
 export interface AllPokemonsPayload {
   limit?: number;
   offset?: number;
