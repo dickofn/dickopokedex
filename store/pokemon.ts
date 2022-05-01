@@ -8,6 +8,7 @@ export const usePokemonStore = defineStore("pokemonStore", {
       offset: 0,
       limit: 24,
       filter: "",
+      favorites: [] as string[],
     };
   },
   actions: {
@@ -18,6 +19,19 @@ export const usePokemonStore = defineStore("pokemonStore", {
     },
     setPokemons(pokemons: PokemonResponse[]) {
       this.pokemons = pokemons;
+    },
+    addFavorites(pokemonName: string) {
+      this.favorites.push(pokemonName);
+      localStorage.setItem("favorites", JSON.stringify(this.favorites));
+    },
+    removeFavorites(pokemonName: string) {
+      this.favorites = this.favorites.filter(
+        (name: string) => name !== pokemonName
+      );
+      localStorage.setItem("favorites", JSON.stringify(this.favorites));
+    },
+    clientUpdateFavorites(favorites: string[]) {
+      this.favorites = favorites;
     },
   },
 });

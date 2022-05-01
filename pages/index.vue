@@ -1,7 +1,18 @@
 <template>
   <div class="relative min-h-full min-w-full px-5 pt-5 pb-16">
-    <div class="sticky top-0 mb-10 pt-5">
-      <PokemonSearch @submit="search" />
+    <div
+      class="sticky top-0 z-20 -mx-5 mb-5 flex flex-col-reverse items-center bg-white bg-opacity-80 py-5 px-5 sm:flex-row"
+    >
+      <PokemonSearch
+        class="mr-0 mb-0 w-full flex-1 sm:mr-2 sm:w-auto"
+        @submit="search"
+      />
+      <NuxtLink
+        class="btn flex w-auto cursor-pointer items-center rounded-b-none border-b-0 border-primary py-4 shadow-none sm:rounded-b sm:border-b sm:shadow-xl"
+        @click="favoritesOnly = !favoritesOnly"
+      >
+        Favorites
+      </NuxtLink>
     </div>
 
     <Grid>
@@ -9,6 +20,8 @@
         v-for="pokemon in data"
         :key="pokemon.name"
         :pokemon="pokemon"
+        :favorites="favorites"
+        @toggle-favorite="toggleFavorite"
       />
     </Grid>
 
@@ -19,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import { storeToRefs } from "pinia";
 import { useGlobalStore } from "~~/store/global";
 import { usePokemonStore } from "~~/store/pokemon";
@@ -29,15 +43,25 @@ const globalStore = useGlobalStore();
 const limit = ref(24);
 const offset = ref(0);
 const filter = ref("");
-const { pokemons, filter: storedFilter } = storeToRefs(pokemonStore);
+const favoritesOnly = ref(false);
+const { pokemons, filter: storedFilter, favorites } = storeToRefs(pokemonStore);
 
-function search(data: string) {
+function search(searchInput: string) {
   limit.value = 24;
   offset.value = 0;
-  filter.value = data;
+  data.value = null;
+  filter.value = searchInput;
 
   // After search go back to top
   if (process.client) document.documentElement.scrollTop = 0;
+}
+
+function toggleFavorite(pokemonName: string) {
+  if (favorites.value.includes(pokemonName)) {
+    pokemonStore.removeFavorites(pokemonName);
+  } else {
+    pokemonStore.addFavorites(pokemonName);
+  }
 }
 
 const { data, error, refresh, pending } = useAsyncData(
@@ -85,7 +109,6 @@ if (error) {
   globalStore.setError(error);
 }
 
-// Set watch observer to update pokemonStore when limit or offset change
 watch([offset, limit, filter], () => {
   refresh();
 });
@@ -108,7 +131,6 @@ if (process.client) {
       document.documentElement.scrollHeight;
 
     if (bottomOfWindow) {
-      console.log("[LOG] | onBottomScroll | pending", pending.value);
       if (!pending.value) offset.value++;
     }
   }
