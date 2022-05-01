@@ -10,7 +10,10 @@ export const useGlobalStore = defineStore("globalStore", {
 
   actions: {
     setError(error: any) {
-      this.error = `Error (${error.response?.status || error.message})`;
+      if (error.value || error.message || error.value)
+        this.error = `Error (${
+          error.response?.status || error.message || error.value
+        })`;
     },
     clearError() {
       this.error = "";

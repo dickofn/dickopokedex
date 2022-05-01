@@ -50,7 +50,7 @@
 
     <NuxtLink
       :to="`/${pokemon.name}`"
-      class="btn mt-4 block w-full cursor-pointer text-center transition-all hover:translate-y-1 focus:translate-y-1"
+      class="btn z-10 mt-4 block w-full cursor-pointer text-center transition-all hover:translate-y-1 focus:translate-y-1"
     >
       See details
     </NuxtLink>

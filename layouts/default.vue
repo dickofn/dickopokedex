@@ -17,7 +17,7 @@
     </main>
 
     <!-- Toast -->
-    <div v-if="toast" class="absolute inset-x-0 bottom-0 pb-4">
+    <div v-if="toast" class="absolute inset-x-0 bottom-0 z-50 pb-5">
       <div class="flex items-center justify-center">
         <Toast :message="error" @close="closeToast" />
       </div>
