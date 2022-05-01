@@ -9,9 +9,9 @@
       />
       <NuxtLink
         to="/favorites"
-        class="btn flex w-auto cursor-pointer items-center rounded-b-none border-b-0 border-primary py-4 shadow-none sm:rounded-b sm:border-b sm:shadow-xl"
+        class="btn ml-auto flex w-auto cursor-pointer items-center rounded-b-none border-b-0 border-primary py-4 shadow-none sm:rounded-b sm:border-b sm:shadow-xl"
       >
-        Favorites
+        <div class="w-full text-center">See favorites</div>
       </NuxtLink>
     </div>
 

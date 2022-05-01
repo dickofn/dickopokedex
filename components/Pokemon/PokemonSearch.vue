@@ -11,7 +11,7 @@
       <input
         id="output"
         v-model="search"
-        class="input relative w-full rounded border-primary bg-white py-4 pl-10 pr-14"
+        class="input relative w-full rounded !rounded-tr-none border-primary bg-white py-4 pl-10 pr-14 sm:!rounded-tr"
         type="text"
         placeholder="Search by name or type..."
       />
