@@ -4,7 +4,7 @@
       {{ name }}
     </div>
     <div v-if="!pending" class="text-center text-sm">
-      {{ data.effect_entries.find((i) => i.language.name === "en").effect }}
+      {{ data }}
     </div>
     <div v-else class="text-center">
       <Spinner />
@@ -33,5 +33,10 @@ const name = computed(() => {
 
 const { pending, data } = useLazyFetch(props.ability.ability.url, {
   server: false,
+  transform: (data: any) => {
+    return data.effect_entries.length >= 0
+      ? data.effect_entries.find((i) => i.language.name === "en").effect
+      : "";
+  },
 });
 </script>
